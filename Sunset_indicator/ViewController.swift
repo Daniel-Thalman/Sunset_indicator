@@ -9,11 +9,12 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    @IBOutlet weak var timeZoneChooser: NSComboBox!
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
     }
 
     override var representedObject: Any? {
@@ -22,6 +23,16 @@ class ViewController: NSViewController {
         }
     }
 
-
+    @IBAction func applyClosePrefences(_ sender: Any) {
+        applyPrefences(sender)
+        cancelPrefences(sender)
+    }
+    @IBAction func applyPrefences(_ sender: Any) {
+        NSLog("applying prefences")
+    }
+    @IBAction func cancelPrefences(_ sender: Any) {
+        self.view.window?.close()
+    }
+    
 }
 

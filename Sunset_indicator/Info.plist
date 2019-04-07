@@ -26,6 +26,10 @@
 	<string>Copyright © 2019 Daniel Thalman. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSLocationUsageDescription</key>
+	<string>Used to determine the current sunrise/sunset time for your location</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
