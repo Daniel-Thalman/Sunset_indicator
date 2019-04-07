@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -22,11 +21,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
-                                            <connections>
-                                                <segue destination="zMV-tW-O7y" kind="show" id="Uep-5Z-GDB"/>
-                                            </connections>
-                                        </menuItem>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -69,102 +64,6 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-535" y="-60"/>
-        </scene>
-        <!--Window Controller-->
-        <scene sceneID="P9B-vv-fgc">
-            <objects>
-                <windowController showSeguePresentationStyle="single" id="zMV-tW-O7y" customClass="WindowController" customModule="Sunset_indicator" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Prefences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="QuB-8M-QXh">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="229" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1600" height="877"/>
-                        <connections>
-                            <outlet property="delegate" destination="zMV-tW-O7y" id="kH6-cx-P8f"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="Kow-Lv-wno" kind="relationship" relationship="window.shadowedContentViewController" id="XpR-cl-5Oa"/>
-                    </connections>
-                </windowController>
-                <customObject id="QyQ-xy-fpY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-151" y="218"/>
-        </scene>
-        <!--ViewConstroller-->
-        <scene sceneID="Mb7-om-aSW">
-            <objects>
-                <viewController title="ViewConstroller" id="Kow-Lv-wno" customClass="ViewController" customModule="Sunset_indicator" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="2YP-hP-h0V">
-                        <rect key="frame" x="0.0" y="0.0" width="291" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oQr-4z-M9H">
-                                <rect key="frame" x="195" y="13" width="82" height="32"/>
-                                <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="977-6q-jeU">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="applyClosePrefences:" target="Kow-Lv-wno" id="kpd-tb-qhN"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5IF-tn-LEa">
-                                <rect key="frame" x="105" y="13" width="82" height="32"/>
-                                <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o1o-6b-25U">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="applyPrefences:" target="Kow-Lv-wno" id="Rck-Xo-JRm"/>
-                                </connections>
-                            </button>
-                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X2F-5R-6cf">
-                                <rect key="frame" x="20" y="256" width="254" height="26"/>
-                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="chooseTimeZone" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="Pc5-12-kKC">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </comboBoxCell>
-                            </comboBox>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="csD-UA-EB7">
-                                <rect key="frame" x="14" y="13" width="82" height="32"/>
-                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ptT-PC-hwa">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="cancelPrefences:" target="Kow-Lv-wno" id="sX3-2Q-bN3"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="csD-UA-EB7" secondAttribute="bottom" constant="20" id="3Uc-SU-1az"/>
-                            <constraint firstItem="oQr-4z-M9H" firstAttribute="leading" secondItem="5IF-tn-LEa" secondAttribute="trailing" constant="20" id="4Nt-R9-E7v"/>
-                            <constraint firstItem="5IF-tn-LEa" firstAttribute="width" secondItem="csD-UA-EB7" secondAttribute="width" id="P6X-bF-Km2"/>
-                            <constraint firstItem="oQr-4z-M9H" firstAttribute="width" secondItem="csD-UA-EB7" secondAttribute="width" id="bL9-jN-7Js"/>
-                            <constraint firstAttribute="trailing" secondItem="X2F-5R-6cf" secondAttribute="trailing" constant="20" id="fHG-7q-RkR"/>
-                            <constraint firstAttribute="bottom" secondItem="5IF-tn-LEa" secondAttribute="bottom" constant="20" id="gZa-fY-r9f"/>
-                            <constraint firstItem="X2F-5R-6cf" firstAttribute="top" secondItem="2YP-hP-h0V" secondAttribute="top" constant="20" id="h14-B0-8f9"/>
-                            <constraint firstItem="X2F-5R-6cf" firstAttribute="leading" secondItem="2YP-hP-h0V" secondAttribute="leading" constant="20" id="nOv-Eh-ipg"/>
-                            <constraint firstAttribute="bottom" secondItem="oQr-4z-M9H" secondAttribute="bottom" constant="20" id="o94-EB-Sze"/>
-                            <constraint firstAttribute="trailing" secondItem="oQr-4z-M9H" secondAttribute="trailing" constant="20" id="tKW-aa-eWk"/>
-                            <constraint firstItem="csD-UA-EB7" firstAttribute="leading" secondItem="2YP-hP-h0V" secondAttribute="leading" constant="20" id="wL9-PM-oTH"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="timeZoneChooser" destination="X2F-5R-6cf" id="fIt-oZ-yue"/>
-                    </connections>
-                </viewController>
-                <customObject id="HPW-vk-g09" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="262.5" y="203"/>
         </scene>
     </scenes>
 </document>
