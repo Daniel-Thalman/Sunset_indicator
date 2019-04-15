@@ -48,16 +48,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
         let set = sunInfo!.sunset!
         var date: Date
         var prefix: String
-        if(mode == 0) {
-            if(rise.timeIntervalSinceNow < set.timeIntervalSinceNow && rise.timeIntervalSinceNow > 0 || set.timeIntervalSinceNow < 0) {
-                date = rise
-            } else {
-                date = set
-            }
-        } else if(mode == 1) {
+        var autoSun: Bool // true = rise, false = set
+        
+        let riseStr = "\(calendar.component(.hour, from: rise)):\(calendar.component(.minute, from: rise))"
+        let setStr = "\(calendar.component(.hour, from: set)):\(calendar.component(.minute, from: set))"
+        
+        sunriseDisplay.title = "Sunrise: \(riseStr)"
+        sunsetDisplay.title = "Sunset: \(setStr)"
+        
+        if(rise.timeIntervalSinceNow < set.timeIntervalSinceNow && rise.timeIntervalSinceNow > 0 || set.timeIntervalSinceNow < 0) {
             date = rise
-        } else if(mode == 2) {
+            autoSun = true
+        } else {
             date = set
+            autoSun = false
+        }
+        
+        if(mode == 1 || (autoSun && mode == 0)) {
+            statusItem.button?.title = sunriseDisplay.title
+        } else if(mode == 2 || (!autoSun && mode == 0)) {
+            statusItem.button?.title = sunsetDisplay.title
         } else {
             mode = 0
             updateSunset(sender)
@@ -68,11 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
         } else {
             prefix = "Sunset"
         }
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        statusItem.button?.title = "\(prefix): \(hour):\(minutes)"
-        sunriseDisplay.title = "Sunrise: \(calendar.component(.hour, from: rise)):\(calendar.component(.minute, from: rise))"
-        sunsetDisplay.title = "Sunset: \(calendar.component(.hour, from: set)):\(calendar.component(.minute, from: set))"
+        
         if(sender != nil ) {
             Timer.scheduledTimer(timeInterval: date.timeIntervalSinceNow, target: self, selector: #selector(updateLocation), userInfo: nil, repeats: false)
         }
