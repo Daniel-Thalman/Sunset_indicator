@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
     var sunsetDisplay = NSMenuItem(title: "Sunset: NA", action: nil, keyEquivalent: "")
     var sunriseDisplay = NSMenuItem(title: "Sunrise: NA", action: nil, keyEquivalent: "")
     var sunInfo: EDSunriseSet?
-    var mode: Int = 0 // 0 = auto, 1 = always sunrise, 2 = always sunset
+    var mode: Int = 0 // 0 = auto, 1 = always sunrise, 2 = always sunset, 3 = both rise/set
     var manager: CLLocationManager!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
         print("sample text")
     }
     
-    @objc func updateSunset(_ sender: Any?) {
+    @objc func updateSunset(_ source: Bool) {
         if sunInfo == nil {
             sunInfo = EDSunriseSet(timezone: TimeZone.init(secondsFromGMT: 0), latitude: 0, longitude: 0)
         }
@@ -47,7 +47,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
         let rise = sunInfo!.sunrise!
         let set = sunInfo!.sunset!
         var date: Date
-        var prefix: String
         var autoSun: Bool // true = rise, false = set
         
         let riseStr = "\(calendar.component(.hour, from: rise)):\(calendar.component(.minute, from: rise))"
@@ -70,35 +69,30 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
             statusItem.button?.title = sunsetDisplay.title
         } else {
             mode = 0
-            updateSunset(sender)
+            updateSunset(source)
             return;
         }
-        if(date.timeIntervalSince(rise) == 0) {
-            prefix = "Sunrise"
-        } else {
-            prefix = "Sunset"
-        }
         
-        if(sender != nil ) {
+        if(source) {
             Timer.scheduledTimer(timeInterval: date.timeIntervalSinceNow, target: self, selector: #selector(updateLocation), userInfo: nil, repeats: false)
         }
     }
     @objc func updateLocation() {
         manager.requestLocation()
-        updateSunset(1)
+        updateSunset(true)
     }
     
     @objc func autoMode() {
         mode = 0
-        updateSunset(nil)
+        updateSunset(false)
     }
     @objc func sunriseMode() {
         mode = 1
-        updateSunset(nil)
+        updateSunset(false)
     }
     @objc func sunsetMode() {
         mode = 2
-        updateSunset(nil)
+        updateSunset(false)
     }
     
     func constructMenu() {
@@ -125,7 +119,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
         NSLog("did find location")
         sunInfo = EDSunriseSet(timezone: TimeZone.autoupdatingCurrent, latitude: manager.location?.coordinate.latitude ?? 0.0, longitude: manager.location?.coordinate.longitude ?? 0.0)
         locationDisplay.title = "Location: \(manager.location?.coordinate.latitude ?? 0.0), \(manager.location?.coordinate.longitude ?? 0.0)"
-        updateSunset(nil)
+        updateSunset(false)
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         NSLog(error.localizedDescription)
