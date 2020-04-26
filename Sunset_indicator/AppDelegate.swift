@@ -49,8 +49,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
         var date: Date
         var autoSun: Bool // true = rise, false = set
         
-        let riseStr = "\(calendar.component(.hour, from: rise)):\(calendar.component(.minute, from: rise))"
-        let setStr = "\(calendar.component(.hour, from: set)):\(calendar.component(.minute, from: set))"
+        let riseStr = String(format: "%02d:%02d", calendar.component(.hour, from: rise), calendar.component(.minute, from: rise))
+        let setStr = String(format: "%02d:%02d", calendar.component(.hour, from: set), calendar.component(.minute, from: set))
         
         sunriseDisplay.title = "Sunrise: \(riseStr)"
         sunsetDisplay.title = "Sunset: \(setStr)"
